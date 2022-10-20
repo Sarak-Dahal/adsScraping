@@ -90,7 +90,6 @@ class FBAdsScraper:
 
         self.ads = []
 
-        self.driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     def scrape_ads(self):
         # Making fb scraper link
@@ -110,10 +109,10 @@ class FBAdsScraper:
             if datetime.datetime.now() >= endTime:
                 break
             else:
-                height = self.driver.execute_script("return document.documentElement.scrollHeight")
+                height = driver.execute_script("return document.documentElement.scrollHeight")
                 driver.execute_script("window.scrollTo(0, " + str(height) + ");")
 
-        ads = driver.find_element(by=By.CLASS_NAME, value='_8n_0').find_elements(by=By.CLASS_NAME, value='_99s5')
+        ads = driver.find_element(by=By.CLASS_NAME, value='_8n_0').find_elements(by=By.CLASS_NAME, value='_99s6')
         i = 1
 
         # Using for loop to go through each scanned data

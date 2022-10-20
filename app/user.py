@@ -12,9 +12,9 @@ from flask import render_template, request
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disachle-dev-shm-usage")
+chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
-
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 
 @app.route('/')
@@ -94,11 +94,11 @@ class FBAdsScraper:
 
     def scrape_ads(self):
         # Making fb scraper link
-        self.driver.get(
+        driver.get(
             "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country={}&q={}".format(
                 self.country,
                 self.keyword))
-        self.driver.implicitly_wait(1)
+        driver.implicitly_wait(1)
         time.sleep(1)
 
 
@@ -111,9 +111,9 @@ class FBAdsScraper:
                 break
             else:
                 height = self.driver.execute_script("return document.documentElement.scrollHeight")
-                self.driver.execute_script("window.scrollTo(0, " + str(height) + ");")
+                driver.execute_script("window.scrollTo(0, " + str(height) + ");")
 
-        ads = self.driver.find_element(by=By.CLASS_NAME, value='_8n_0').find_elements(by=By.CLASS_NAME, value='_99s5')
+        ads = driver.find_element(by=By.CLASS_NAME, value='_8n_0').find_elements(by=By.CLASS_NAME, value='_99s5')
         i = 1
 
         # Using for loop to go through each scanned data

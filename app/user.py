@@ -1,3 +1,5 @@
+
+
 import datetime
 import time
 import pandas as pd
@@ -8,6 +10,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from flask import render_template, request
 from collections import OrderedDict
+
+
+
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
@@ -103,7 +108,7 @@ class FBAdsScraper:
                 height = self.driver.execute_script("return document.documentElement.scrollHeight")
                 self.driver.execute_script("window.scrollTo(0, " + str(height) + ");")
 
-        ads = self.driver.find_element(by=By.CLASS_NAME, value='_8n_0').find_elements(by=By.CLASS_NAME, value='_99s5')
+        ads = self.driver.find_element(by=By.CLASS_NAME, value='_8n_0').find_elements(by=By.CLASS_NAME, value='_99s6')
         i = 1
         for ad in ads:
             try:

@@ -8,13 +8,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from flask import render_template, request
 
-#
-# chrome_options = webdriver.ChromeOptions()
-# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--disable-dev-shm-usage")
-# chrome_options.add_argument("--no-sandbox")
-# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
 
 global appended_data
 appended_data = []
@@ -85,7 +85,7 @@ class FBAdsScraper:
 
         self.ads = []
 
-        self.driver = webdriver.Chrome()
+        self.driver = driver
 
     def scrape_ads(self):
 
@@ -158,8 +158,8 @@ class FBAdsScraper:
                 "Video": video
             })
 
-            # ad_details = OrderedDict({"Status": status, "Page": page, "Title": title, "Link": link, "Id": adsId, "Date":date,"Facebook Link":fbLink, "Image": image, "Video": video})
-            # self.ads.append('ad_details')
+            # ad_details = OrderedDict({"Status": status, "Page": page, "Title": title, "Link": link, "Id": adsId,
+            # "Date":date,"Facebook Link":fbLink, "Image": image, "Video": video}) self.ads.append('ad_details')
             # print(i, ad_details)
             print(i, " Data stored.")
             # df = df.append(ad_details,ignore_index=True)

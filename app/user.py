@@ -1,5 +1,3 @@
-
-
 import datetime
 import time
 import pandas as pd
@@ -9,23 +7,21 @@ from app import app
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from flask import render_template, request
-from collections import OrderedDict
 
-
-
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+#
+# chrome_options = webdriver.ChromeOptions()
+# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--disable-dev-shm-usage")
+# chrome_options.add_argument("--no-sandbox")
+# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
 
 global appended_data
 appended_data = []
 
 
-@app.route('/')
-def home():
+@app.route('/', endpoint='home')
+def index():
     return render_template('index.html')
 
 
@@ -89,7 +85,7 @@ class FBAdsScraper:
 
         self.ads = []
 
-        self.driver = driver
+        self.driver = webdriver.Chrome()
 
     def scrape_ads(self):
 
@@ -170,3 +166,8 @@ class FBAdsScraper:
             i = i + 1
         # df.to_csv('data.csv', sep=',')
         pd.DataFrame(data).to_csv('data.csv')
+
+
+
+
+
